@@ -77,11 +77,6 @@ function EditorToHtml({ data }) {
     return <div>Working on Code Support</div>;
   };
 
-  //Code element render
-  const onRenderEmbed = () => {
-    return <div>Working on embed Support</div>;
-  };
-
   const elements = {
     header: onRenderHeader,
     paragraph: onRenderParagraph,
@@ -91,8 +86,7 @@ function EditorToHtml({ data }) {
     quote: onRenderQuote,
     warning: onRenderWarning,
     table: onRenderTable,
-    code: onRenderCode,
-    embed: onRenderEmbed
+    code: onRenderCode
   };
 
   return (

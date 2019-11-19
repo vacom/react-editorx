@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo } from "react";
 import EditorJS from "@editorjs/editorjs";
-
+//Tools
 import Warning from "@editorjs/warning";
 import Table from "@editorjs/table";
 import SimpleImage from "@editorjs/simple-image";
@@ -8,7 +8,6 @@ import Marker from "@editorjs/marker";
 import List from "@editorjs/list";
 import InlineCode from "@editorjs/inline-code";
 import Header from "@editorjs/header";
-import Embed from "@editorjs/embed";
 import Delimiter from "@editorjs/delimiter";
 import CodeTool from "@editorjs/code";
 import Checklist from "@editorjs/checklist";
@@ -23,7 +22,6 @@ const tools = {
     },
     shortcut: "CMD+SHIFT+H"
   },
-
   image: {
     class: SimpleImage,
     inlineToolbar: ["link"]
@@ -60,7 +58,6 @@ const tools = {
     class: InlineCode,
     shortcut: "CMD+SHIFT+C"
   },
-  embed: Embed,
   table: {
     class: Table,
     inlineToolbar: true,
@@ -90,7 +87,8 @@ function Editor({
           }
         }
       }),
-    [props.data]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [props]
   );
 
   const onRemoveEditor = async () => {
@@ -128,6 +126,7 @@ function Editor({
   useEffect(() => {
     onInitEditor();
     return () => onRemoveEditor();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return <Component id={editorHolder} {...holderProps} />;

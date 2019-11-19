@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useCallback, useState } from "react";
 import Editor, { EditorToHtml } from "./Editor";
 
 const data = {
@@ -149,34 +149,41 @@ const data = {
 };
 
 function App() {
-  const handleChange = data => {
-    console.log("handleChange = ", data);
+  const [tab, setTab] = useState(0);
+  const handleReady = data => {
+    console.log("ready = ", data);
   };
 
-  const handleReady = data => {
-    console.log("handleReady = ", data);
-  };
+  const handleChange = useCallback(
+    data => {
+      console.log("change = ", data);
+    },
+    []
+  );
 
   return (
     <Fragment>
-      {/*
-    <Editor
-        placeholder="Let`s write an awesome story!"
-        data={data}
-        onChange={handleChange}
-        onReady={handleReady}
-        autofocus
-      />
-    
-    */}
-      <Editor
-        placeholder="Let`s write an awesome story!"
-        data={data}
-        onChange={handleChange}
-        onReady={handleReady}
-        autofocus
-      />
-      <EditorToHtml data={data} />
+      <div>
+        <button onClick={() => setTab(0)} disabled={tab === 0}>
+          Editor
+        </button>
+        <button onClick={() => setTab(1)} disabled={tab === 1}>
+          Read Only
+        </button>
+      </div>
+      {tab === 0 ? (
+        <Editor
+          placeholder="Let`s write an awesome story!"
+          data={data}
+          onChange={handleChange}
+          onReady={handleReady}
+          autofocus
+        />
+      ) : (
+        <div style={{ width: "600px" }}>
+          <EditorToHtml data={data} />
+        </div>
+      )}
     </Fragment>
   );
 }
